@@ -1,0 +1,11 @@
+config router static
+    edit 1
+        set dst 0.0.0.0 0.0.0.0
+        set gateway 192.168.202.2
+        set device "port1"
+    next
+end
+
+verification
+get router info routing-table all
+show router static
