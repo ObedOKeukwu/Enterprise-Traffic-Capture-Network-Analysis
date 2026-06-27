@@ -15,29 +15,21 @@ vlan 13
 exit
 
 ! Assign access ports
-interface Ethernet0/1
+interface Ethernet0/0
  switchport mode access
  switchport access vlan 10
  no shutdown
 exit
 
-interface Ethernet0/2
+interface Ethernet0/1
  switchport mode access
  switchport access vlan 11
  no shutdown
 exit
 
-interface Ethernet0/3
+interface Ethernet0/2
  switchport mode access
  switchport access vlan 13
- no shutdown
-exit
-
-! Configure trunk to firewall/switch
-interface Ethernet0/0
- switchport trunk encapsulation dot1q
- switchport mode trunk
- switchport trunk allowed vlan 10,11,13
  no shutdown
 exit
 
