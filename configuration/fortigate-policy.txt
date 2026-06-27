@@ -1,0 +1,64 @@
+config firewall policy
+    edit 1
+        set name "HR-to-IT"
+        set srcintf "HR"
+        set dstintf "IT"
+        set srcaddr "all"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set logtraffic all
+    next
+
+    edit 2
+        set name "Block-Spoofed-IP"
+        set srcintf "port2"
+        set dstintf "port1"
+        set srcaddr "Spoofed_IPs"
+        set dstaddr "all"
+        set action deny
+        set schedule "always"
+        set service "ALL"
+        set logtraffic all
+    next
+
+    edit 3
+        set name "IT to HR"
+        set srcintf "IT"
+        set dstintf "HR"
+        set srcaddr "vlan 10 address"
+        set dstaddr "vlan 11 address"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set logtraffic all
+    next
+
+    edit 4
+        set name "vlan 10 to internet"
+        set srcintf "IT"
+        set dstintf "port1"
+        set srcaddr "vlan 10 address"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set nat enable
+        set logtraffic all
+    next
+
+    edit 5
+        set name "vlan 11 to internet"
+        set srcintf "HR"
+        set dstintf "port1"
+        set srcaddr "vlan 11 address"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set nat enable
+        set logtraffic all
+    next
+end
+show firewall policy
